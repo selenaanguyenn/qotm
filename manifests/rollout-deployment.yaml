@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  annotations:
+    getambassador.io/rolloutId: d8f7760c-561d-4aaa-b9d8-6440abf09f34
+  creationTimestamp: null
+  name: quote
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: quote
+  strategy:
+    canary:
+      canaryService: quote-canary
+      stableService: quote
+      steps:
+      - setWeight: 30
+      - pause:
+          duration: 400
+      - setWeight: 60
+      - pause:
+          duration: 400
+      - setWeight: 90
+      - pause:
+          duration: 400
+      trafficRouting:
+        ambassador:
+          mappings:
+          - quote-ui
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: quote
+    spec:
+      containers:
+      - image: registry.gitlab.com/luishernandez2/qotm:2.0.0
+        name: backend
+        ports:
+        - containerPort: 80
+          name: http
+        resources: {}
+status:
+  blueGreen: {}
+  canary: {}
