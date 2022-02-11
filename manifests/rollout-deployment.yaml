@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   annotations:
-    getambassador.io/rolloutId: b7ccc225-c47b-493f-a210-b87eccb25757
+    getambassador.io/rolloutId: e5984b32-cfea-4603-a42d-35554e985466
   creationTimestamp: null
   name: quote
 spec:
@@ -17,34 +17,34 @@ spec:
       steps:
       - setWeight: 10
       - pause:
-          duration: 12
+          duration: 30
       - setWeight: 20
       - pause:
-          duration: 12
+          duration: 30
       - setWeight: 30
       - pause:
-          duration: 12
+          duration: 30
       - setWeight: 40
       - pause:
-          duration: 12
+          duration: 30
       - setWeight: 50
       - pause:
-          duration: 12
+          duration: 30
       - setWeight: 60
       - pause:
-          duration: 12
+          duration: 30
       - setWeight: 70
       - pause:
-          duration: 12
+          duration: 30
       - setWeight: 80
       - pause:
-          duration: 12
+          duration: 30
       - setWeight: 90
       - pause:
-          duration: 12
+          duration: 30
       - setWeight: 100
       - pause:
-          duration: 12
+          duration: 30
       trafficRouting:
         ambassador:
           mappings:
@@ -56,7 +56,7 @@ spec:
         app: quote
     spec:
       containers:
-      - image: datawire/quote:0.4.1
+      - image: datawire/quote:0.5.0
         name: backend
         ports:
         - containerPort: 80
