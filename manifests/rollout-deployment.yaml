@@ -35,7 +35,7 @@ spec:
         app: quote
     spec:
       containers:
-      - image: registry.gitlab.com/luishernandez2/qotm:2.0.0
+      - image: datawire/quote:0.4.1
         name: backend
         ports:
         - containerPort: 80
