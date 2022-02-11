@@ -8,7 +8,7 @@ metadata:
         a8r.io/chat: "#ambassador"
         a8r.io/bugs: "https://gitlab.com/luishernandez2/issues"
         a8r.io/documentation: "https://gitlab.com/luishernandez2/blob/master/README.md"
-        a8r.io/repository: "https://gitlab.com/luishernandez2/qotm.git"
+        a8r.io/repository: "https://github.com/selenaanguyenn/qotm.git"
         a8r.io/support: "http://a8r.io/Slack"
         a8r.io/runbook: "https://gitlab.com/luishernandez2/blob/master/README.md"
         a8r.io/incidents: "https://gitlab.com/luishernandez2/issues"
