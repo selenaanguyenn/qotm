@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   annotations:
-    getambassador.io/rolloutId: d8f7760c-561d-4aaa-b9d8-6440abf09f34
+    getambassador.io/rolloutId: b7ccc225-c47b-493f-a210-b87eccb25757
   creationTimestamp: null
   name: quote
 spec:
@@ -15,15 +15,36 @@ spec:
       canaryService: quote-canary
       stableService: quote
       steps:
+      - setWeight: 10
+      - pause:
+          duration: 12
+      - setWeight: 20
+      - pause:
+          duration: 12
       - setWeight: 30
       - pause:
-          duration: 400
+          duration: 12
+      - setWeight: 40
+      - pause:
+          duration: 12
+      - setWeight: 50
+      - pause:
+          duration: 12
       - setWeight: 60
       - pause:
-          duration: 400
+          duration: 12
+      - setWeight: 70
+      - pause:
+          duration: 12
+      - setWeight: 80
+      - pause:
+          duration: 12
       - setWeight: 90
       - pause:
-          duration: 400
+          duration: 12
+      - setWeight: 100
+      - pause:
+          duration: 12
       trafficRouting:
         ambassador:
           mappings:
