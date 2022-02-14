@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   annotations:
-    getambassador.io/rolloutId: b58e640a-9c6a-4233-88c7-c0b3cdef5b05
+    getambassador.io/rolloutId: e88cbb1a-df2c-4f73-8906-400e4af6f3cc
   creationTimestamp: null
   name: quote
 spec:
@@ -56,7 +56,7 @@ spec:
         app: quote
     spec:
       containers:
-      - image: datawire/quote:0.5.0
+      - image: datawire/quote:0.4.1
         name: backend
         ports:
         - containerPort: 80
