@@ -1,0 +1,114 @@
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: argocd-server-ui
+  namespace: argocd
+spec:
+  host: argocd.example.com
+  prefix: /
+  service: argocd-server:443
+
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: argocd-server
+  namespace: argocd
+spec:
+  prefix: /argo-cd
+  rewrite: /argo-cd
+  service: argocd-server:443
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  annotations:
+    getambassador.io/rolloutId: 7b0570e0-3d41-4560-8f31-081628da1a4d
+  creationTimestamp: null
+  name: quote
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: quote
+  strategy:
+    canary:
+      canaryService: quote-canary
+      stableService: quote
+      steps:
+      - setWeight: 10
+      - pause:
+          duration: 12
+      - setWeight: 20
+      - pause:
+          duration: 12
+      - setWeight: 30
+      - pause:
+          duration: 12
+      - setWeight: 40
+      - pause:
+          duration: 12
+      - setWeight: 50
+      - pause:
+          duration: 12
+      - setWeight: 60
+      - pause:
+          duration: 12
+      - setWeight: 70
+      - pause:
+          duration: 12
+      - setWeight: 80
+      - pause:
+          duration: 12
+      - setWeight: 90
+      - pause:
+          duration: 12
+      - setWeight: 100
+      - pause:
+          duration: 12
+      trafficRouting:
+        ambassador:
+          mappings:
+          - quote-ui
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: quote
+    spec:
+      containers:
+      - image: datawire/quote:0.5.0
+        name: backend
+        ports:
+        - containerPort: 80
+          name: http
+        resources: {}
+status:
+  blueGreen: {}
+  canary: {}
+
+---
+
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: argocd-server-ui
+  namespace: argocd
+spec:
+  host: argocd.example.com
+  prefix: /
+  service: argocd-server:443
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: argocd-server-cli
+  namespace: argocd
+spec:
+  host: argocd.example.com:443
+  prefix: /
+  service: argocd-server:443
+
+---
